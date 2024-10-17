@@ -1,14 +1,13 @@
 package org.pgm.japdemo.controller;
 
 import lombok.extern.log4j.Log4j2;
+import org.pgm.japdemo.dto.SampleDTO;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -57,6 +56,18 @@ public class SampleController {
         for(int i=1; i<10; i++){
             strList2.add("Data"+i);
         }
+        Map<String, Integer> maps=new HashMap<>();
+        maps.put("홍길동",80);
+        maps.put("박경미",75);
+        maps.put("윤요섭",85);
+        model.addAttribute("maps",maps);
+
+        SampleDTO sampleDTO=new SampleDTO();
+        sampleDTO.setName("hong");
+        sampleDTO.setAge(20);
+        sampleDTO.setGender("남자");
+
+        model.addAttribute("sampleDTO",sampleDTO);
         model.addAttribute("strList", strList);
         model.addAttribute("strList2", strList2);
     }
