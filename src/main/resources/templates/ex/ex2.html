@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http:www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>[[${strList}]]</div>
+<div th:text="${strList}"></div>
+<ul>
+    <li th:each="str:${strList}">[[${str}]]</li>
+</ul>
+<ul>
+    <th:block th:each="str:${strList}">
+        <li>[[${str}]]</li>
+    </th:block>
+</ul>
+</body>
+</html>
