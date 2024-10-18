@@ -1,9 +1,7 @@
 package org.pgm.japdemo.domain;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -14,9 +12,12 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name="tbl_item")
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Item {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="item_id")
     private Long id;
     @Column(nullable = false,length = 50)
