@@ -29,6 +29,7 @@ public class BoardServiceImpl implements BoardService {
         log.info("getList");
         Pageable pageable=pageRequestDTO.getPageable("bno");
         Page<Board> result = boardRepository.findAll(pageable);
+        log.info("aaaa"+result.getTotalElements());
 
         List<BoardDTO> dtoList=result.getContent().stream()
                 .map(board -> modelMapper.map(board, BoardDTO.class))
@@ -44,7 +45,10 @@ public class BoardServiceImpl implements BoardService {
     @Override
     public Board getBoard(Long bno) {
         log.info("getBoard"+bno);
-        return boardRepository.findById(bno).get();
+        Board board=boardRepository.findById(bno).get();
+        board.updateVisitcount();
+        boardRepository.save(board);
+        return board;
     }
 
     @Override

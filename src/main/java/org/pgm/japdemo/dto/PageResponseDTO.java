@@ -3,11 +3,13 @@ package org.pgm.japdemo.dto;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
+import lombok.extern.log4j.Log4j2;
 
 import java.util.List;
 
 @Getter
 @ToString
+@Log4j2
 public class PageResponseDTO<E> {
 
     private int page;
@@ -38,8 +40,9 @@ public class PageResponseDTO<E> {
 
         this.total = total;
         this.dtoList = dtoList;
+        //log.info();
 
-        this.end =   (int)(Math.ceil(this.page / this.size )) *  this.size;
+        this.end =   (int)(Math.ceil((double) this.page / this.size )) *  this.size;
 
         this.start = this.end - (this.size-1);
 

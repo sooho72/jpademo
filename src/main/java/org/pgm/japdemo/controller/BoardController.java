@@ -2,7 +2,9 @@ package org.pgm.japdemo.controller;
 
 import lombok.extern.log4j.Log4j2;
 import org.pgm.japdemo.domain.Board;
+import org.pgm.japdemo.dto.BoardDTO;
 import org.pgm.japdemo.dto.PageRequestDTO;
+import org.pgm.japdemo.dto.PageResponseDTO;
 import org.pgm.japdemo.service.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,8 +24,11 @@ public class BoardController {
     @GetMapping("/list")
     public void list(PageRequestDTO pageRequestDTO,Model model) {
         log.info("controller list");
+        PageResponseDTO<BoardDTO> responseDTO = boardService.getList(pageRequestDTO);
+        log.info(responseDTO);
+        model.addAttribute("responseDTO", responseDTO);
         //model.addAttribute("pageRequestDTO", pageRequestDTO);
-        model.addAttribute("responseDTO", boardService.getList(pageRequestDTO));
+        //model.addAttribute("responseDTO", boardService.getList(pageRequestDTO));
     }
     @GetMapping("/register")
     public void registerGet() {
