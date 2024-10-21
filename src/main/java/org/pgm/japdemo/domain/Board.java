@@ -25,7 +25,7 @@ public class Board {
     @Column(nullable = false,length = 50)
     private String writer;
     @CreationTimestamp
-    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date postdate;
     @ColumnDefault("0")
     private int visitcount;
