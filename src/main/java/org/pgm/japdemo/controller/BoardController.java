@@ -2,6 +2,7 @@ package org.pgm.japdemo.controller;
 
 import lombok.extern.log4j.Log4j2;
 import org.pgm.japdemo.domain.Board;
+import org.pgm.japdemo.dto.PageRequestDTO;
 import org.pgm.japdemo.service.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,9 +20,9 @@ public class BoardController {
     private BoardService boardService;
 
     @GetMapping("/list")
-    public void list(Model model) {
+    public void list(PageRequestDTO pageRequestDTO,Model model) {
         log.info("controller list");
-        model.addAttribute("boardList", boardService.getList());
+        model.addAttribute("responseDTO", boardService.getList(pageRequestDTO));
     }
     @GetMapping("/register")
     public void registerGet() {
@@ -34,12 +35,13 @@ public class BoardController {
         return "redirect:/board/list";
     }
     @GetMapping({"/read","/modify"})
-    public void read(Long bno, Model model) {
+    public void read(Long bno,PageRequestDTO pageRequestDTO, Model model) {
         log.info("controller read"+bno);
         model.addAttribute("dto", boardService.getBoard(bno));
     }
     @PostMapping("/modify")
-    public String modify(Board board,RedirectAttributes redirectAttributes) {
+    public String modify(Board board,PageRequestDTO pageRequestDTO,
+                         RedirectAttributes redirectAttributes) {
         log.info("controller modify"+board);
         boardService.updateBoard(board);
         redirectAttributes.addAttribute("bno", board.getBno());

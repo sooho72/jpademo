@@ -14,16 +14,16 @@
                     <th scope="col">Bno</th>
                     <th scope="col">Title</th>
                     <th scope="col">Writer</th>
-                    <th scope="col">PostDate</th>
+                    <th scope="col">RegDate</th>
                     <th scope="col">VisitCount</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="dto:${boardList}">
+                <tr th:each="dto:${responseDTO.dtoList}">
                     <th scope="row">[[${dto.bno}]]</th>
                     <td><a th:href="@{/board/read(bno=${dto.bno})}">[[${dto.title}]]</a></td>
                     <td>[[${dto.writer}]]</td>
-                    <td>[[${dto.postdate}]]</td>
+                    <td>[[${dto.regDate}]]</td>
                     <td>[[${dto.visitcount}]]</td>
                 </tr>
                 </tbody>
