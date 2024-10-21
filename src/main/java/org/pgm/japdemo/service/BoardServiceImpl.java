@@ -28,7 +28,13 @@ public class BoardServiceImpl implements BoardService {
     public PageResponseDTO<BoardDTO> getList(PageRequestDTO pageRequestDTO) {
         log.info("getList");
         Pageable pageable=pageRequestDTO.getPageable("bno");
-        Page<Board> result = boardRepository.findAll(pageable);
+        //Page<Board> result = boardRepository.findAll(pageable);
+        //Page<Board> result=null;
+        //if(pageRequestDTO.getKeyword()==null) {
+            //Page<Board> result =boardRepository.findAll(pageable);
+        //}else {
+        Page<Board> result = boardRepository.searchAll(pageRequestDTO.getKeyword(), pageable);
+        //}
         log.info("aaaa"+result.getTotalElements());
 
         List<BoardDTO> dtoList=result.getContent().stream()
