@@ -27,16 +27,20 @@ public class BoardServiceImpl implements BoardService {
     @Override
     public PageResponseDTO<BoardDTO> getList(PageRequestDTO pageRequestDTO) {
         log.info("getList");
-        Pageable pageable=pageRequestDTO.getPageable("bno");
-        //Page<Board> result = boardRepository.findAll(pageable);
-        Page<Board> result=null;
-        if(pageRequestDTO.getKeyword()==null || pageRequestDTO.getKeyword().equals("")) {
-            result =boardRepository.findAll(pageable);
-        }else {
-            result = boardRepository.searchAll(pageRequestDTO.getKeyword(), pageable);
-        }
-        log.info("aaaa"+result.getTotalElements());
 
+//        Pageable pageable=pageRequestDTO.getPageable("bno");
+//        //Page<Board> result = boardRepository.findAll(pageable);
+//        Page<Board> result=null;
+//        if(pageRequestDTO.getKeyword()==null || pageRequestDTO.getKeyword().equals("")) {
+//            result =boardRepository.findAll(pageable);
+//        }else {
+//            result = boardRepository.searchAll(pageRequestDTO.getKeyword(), pageable);
+//        }
+//        log.info("aaaa"+result.getTotalElements());
+        String[] types = pageRequestDTO.getTypes();
+        String keyword = pageRequestDTO.getKeyword();
+        Pageable pageable = pageRequestDTO.getPageable("bno");
+        Page<Board> result=boardRepository.searchAll(types, keyword, pageable);
         List<BoardDTO> dtoList=result.getContent().stream()
                 .map(board -> modelMapper.map(board, BoardDTO.class))
                 .collect(Collectors.toUnmodifiableList());
