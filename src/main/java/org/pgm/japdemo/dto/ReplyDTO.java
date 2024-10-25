@@ -1,35 +1,35 @@
 package org.pgm.japdemo.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import groovyjarjarantlr4.v4.runtime.misc.NotNull;
 import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class BoardDTO {
+public class ReplyDTO {
+    private Long rno;
+
+    @NotNull
     private Long bno;
-    @NotEmpty
-    @Size(min = 3, max = 200)
-    private String title;
 
     @NotEmpty
-    private String content;
+    private String replyText;
 
     @NotEmpty
-    private String writer;
+    private String replyer;
 
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private LocalDateTime regDate;
 
+    @JsonIgnore
     private LocalDateTime modDate;
-
-    private List<String> fileNames;
-
 }
